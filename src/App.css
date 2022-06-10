@@ -9,4 +9,29 @@ input,button{
   margin: 10px;
   border-radius: 4px;
   font-size: 13px;
+  background-color: rgb(230, 240, 244);
+}
+button{
+  border: 1px solid ;
+}
+button:hover {
+  background-color:#002ead;
+  transition: 0.7s;
+  cursor: pointer;
+  
+}
+
+table{
+  margin-top: 30px;
+  border-collapse: collapse;
+  width: 70%;
+  margin: auto;
+}
+
+th,td{
+  border: 1px solid black;
+  padding: 5px;
+}
+table button{
+  padding: 3px 20px ;
 }

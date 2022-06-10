@@ -1,18 +1,40 @@
 import React from "react";
 
-const GroceryList = ({ data, handleDelete }) => {
-  console.log(data);
+const GroceryList = ({ data, handleDelete,handleToggle }) => {
+  console.log("data",data);
   return (
     <>
-      {data.map((item) => (
-        <div style={{ fontSize: "19px", marginBottom: "-25px" }} key={item.id}>
-          <h2 style={{ display: "inline-block", color: "yellowgreen" }}>
-            {item.itemName}
-          </h2>
-          {"      "}
-          <button onClick={() => handleDelete(item.id)}>DELETE</button>
-        </div>
-      ))}
+      <table>
+        <thead>
+          <tr>
+            <th>Item Name</th>
+            <th>Availability</th>
+            <th>Toggle Availability</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+              {data.map((item) => (
+
+              <tr  key={item.id}>
+                <td style={{ color: "yellowgreen" }}>
+                  {item.title}
+                </td>
+                <td style={item.status ? {color:"green"} : {color: "red"}} >
+                  {item.status ? "Available" : " Not Available "}
+                </td>
+                <td>
+                <button onClick={() => handleToggle(item.id)}>Toggle</button>
+
+                </td>
+                <td>
+                <button onClick={() => handleDelete(item.id)}>DELETE</button>
+
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
     </>
   );
 };

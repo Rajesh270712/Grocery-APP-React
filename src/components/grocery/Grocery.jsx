@@ -4,79 +4,86 @@ import GroceryList from "./GroceryList";
 
 const Grocery = () => {
   const [data, setData] = React.useState([]);
-  const [loading,setLoading] =React.useState(false)
-  const [error,setError] =React.useState(false)
-
-
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(false);
 
   const getData = () => {
     fetch(`http://localhost:3000/items`)
-    .then((res)=>(res.json()))
-    .then((res)=>setData(res))
+      .then((res) => res.json())
+      .then((res) => setData(res));
+  };
+
+  React.useEffect(() => {
+    getData();
+  }, []);
+
+  if (loading) {
+    return <h2>Loading...</h2>;
   }
 
-
-  React.useEffect(()=>{
-    getData()
-  },[])
-
-  if(loading){
-    return <h2>Loading...</h2>
+  if (error) {
+    return <h2>Error.. Something Went Wrong</h2>;
   }
 
-  if(error){
-   return <h2>Error.. Something Went Wrong</h2>
-  }
- 
   const handleAdd = (itemName) => {
-    setLoading(true)
+    setLoading(true);
     const payload = {
       title: itemName,
-      status : false,
-    }
-    fetch(`http://localhost:3000/items`,{
-      method : "POST",
+      status: false,
+    };
+    fetch(`http://localhost:3000/items`, {
+      method: "POST",
       body: JSON.stringify(payload),
-      headers:{
-        "Content-Type" : "Application/json"
-      }  
+      headers: {
+        "Content-Type": "Application/json",
+      },
     })
-    .then((res)=>res.json())
-    .then((res) => getData())
-    .catch(()=>{setError(true)})
-    .finally(()=>{setLoading(false)})
+      .then((res) => res.json())
+      .then((res) => getData())
+      .catch(() => {
+        setError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const handleToggle = (id) => {
-    fetch(`http://localhost:3000/items/${id}`,{
-      method : "PATCH",
+    fetch(`http://localhost:3000/items/${id}`, {
+      method: "PATCH",
       body: JSON.stringify({
-       status:true
+        status: true,
       }),
-      headers:{
-        "Content-Type" : "Application/json"
-      }  
+      headers: {
+        "Content-Type": "Application/json",
+      },
     })
-    .then((res)=>res.json())
-    .then((res) => getData())
-    .catch(()=>{setError(true)})
-    .finally(()=>{setLoading(false)})
-  }
-
+      .then((res) => res.json())
+      .then((res) => getData())
+      .catch(() => {
+        setError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const handleDelete = (id) => {
-    setLoading(true)
-    fetch(`http://localhost:3000/items/${id}`,{
-      method : "DELETE",
-      headers:{
-        "Content-Type" : "Application/json"
-      }  
+    setLoading(true);
+    fetch(`http://localhost:3000/items/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "Application/json",
+      },
     })
-    .then((res)=>res.json())
-    .then((res) => getData())
-    .catch(()=>{setError(true)})
-    .finally(()=>{setLoading(false)})
-
+      .then((res) => res.json())
+      .then((res) => getData())
+      .catch(() => {
+        setError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -94,7 +101,11 @@ const Grocery = () => {
         Grocery App
       </h1>
       <GroceryInput handleAdd={handleAdd} />
-      <GroceryList data={data} handleDelete={handleDelete} handleToggle={handleToggle} />
+      <GroceryList
+        data={data}
+        handleDelete={handleDelete}
+        handleToggle={handleToggle}
+      />
     </>
   );
 };

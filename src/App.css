@@ -1,37 +1,38 @@
-body{
+body {
   margin: 0%;
   text-align: center;
   background-color: rgb(204, 227, 234);
 }
 
-input,button{
+input,
+button {
   padding: 5px 20px;
   margin: 10px;
   border-radius: 4px;
   font-size: 13px;
   background-color: rgb(230, 240, 244);
 }
-button{
-  border: 1px solid ;
+button {
+  border: 1px solid;
 }
 button:hover {
-  background-color:#002ead;
+  background-color: #002ead;
   transition: 0.7s;
   cursor: pointer;
-  
 }
 
-table{
+table {
   margin-top: 30px;
   border-collapse: collapse;
   width: 70%;
   margin: auto;
 }
 
-th,td{
+th,
+td {
   border: 1px solid black;
   padding: 5px;
 }
-table button{
-  padding: 3px 20px ;
+table button {
+  padding: 3px 20px;
 }

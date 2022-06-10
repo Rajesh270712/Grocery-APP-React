@@ -1,7 +1,7 @@
 import React from "react";
 
-const GroceryList = ({ data, handleDelete,handleToggle }) => {
-  console.log("data",data);
+const GroceryList = ({ data, handleDelete, handleToggle }) => {
+ 
   return (
     <>
       <table>
@@ -14,25 +14,20 @@ const GroceryList = ({ data, handleDelete,handleToggle }) => {
           </tr>
         </thead>
         <tbody>
-              {data.map((item) => (
-
-              <tr  key={item.id}>
-                <td style={{ color: "yellowgreen" }}>
-                  {item.title}
-                </td>
-                <td style={item.status ? {color:"green"} : {color: "red"}} >
-                  {item.status ? "Available" : " Not Available "}
-                </td>
-                <td>
+          {data.map((item) => (
+            <tr key={item.id}>
+              <td style={{ color: "yellowgreen" }}>{item.title}</td>
+              <td style={item.status ? { color: "green" } : { color: "red" }}>
+                {item.status ? "Available" : " Not Available "}
+              </td>
+              <td>
                 <button onClick={() => handleToggle(item.id)}>Toggle</button>
-
-                </td>
-                <td>
+              </td>
+              <td>
                 <button onClick={() => handleDelete(item.id)}>DELETE</button>
-
-                </td>
-              </tr>
-            ))}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>

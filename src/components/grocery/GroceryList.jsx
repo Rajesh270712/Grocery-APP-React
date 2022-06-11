@@ -21,10 +21,11 @@ const GroceryList = ({ data, handleDelete, handleToggle }) => {
                 {item.status ? "Available" : " Not Available "}
               </td>
               <td>
-                <button onClick={() => handleToggle(item.id)}>Toggle</button>
+                <button onClick={() => handleToggle(item.id,item.status)}>Toggle</button>
               </td>
               <td>
-                <button onClick={() => handleDelete(item.id)}>DELETE</button>
+             
+                <button onClick={() =>{ handleDelete(item.id)}}>DELETE</button>
               </td>
             </tr>
           ))}

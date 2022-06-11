@@ -6,16 +6,17 @@ const Grocery = () => {
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
-
+  const [page, setPage] = React.useState(1);
+  
   const getData = () => {
-    fetch(`http://localhost:3000/items`)
+    fetch(`http://localhost:3000/items?_page=${page}&_limit=3`)
       .then((res) => res.json())
       .then((res) => setData(res));
   };
 
   React.useEffect(() => {
     getData();
-  }, []);
+  }, [page]);
 
   if (loading) {
     return <h2>Loading...</h2>;
@@ -48,11 +49,11 @@ const Grocery = () => {
       });
   };
 
-  const handleToggle = (id) => {
+  const handleToggle = (id, status) => {
     fetch(`http://localhost:3000/items/${id}`, {
       method: "PATCH",
       body: JSON.stringify({
-        status: true,
+        status: !status,
       }),
       headers: {
         "Content-Type": "Application/json",
@@ -106,6 +107,14 @@ const Grocery = () => {
         handleDelete={handleDelete}
         handleToggle={handleToggle}
       />
+      <button disabled={page===1} onClick={() => setPage(page - 1)}>Previous</button>
+      <button
+        onClick={() => {
+          setPage(page + 1);
+        }}
+      >
+        Next
+      </button>
     </>
   );
 };
